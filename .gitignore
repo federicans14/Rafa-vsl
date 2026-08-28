@@ -1,0 +1,20 @@
+node_modules/
+dist/
+build/
+
+# Variables de entorno. NUNCA al repo: aquí van el token de Turso (acceso total
+# a la base de leads) y el de Green API.
+.env
+.env.*
+!.env.example
+
+# Base de pruebas en local
+*.db
+*.db-*
+
+# Restos de generación de secretos
+.secretos-generados.tmp
+
+.DS_Store
+Thumbs.db
+*.log

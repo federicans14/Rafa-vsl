@@ -1,0 +1,10 @@
+node_modules
+.env
+.env.*
+!.env.example
+
+# Base de datos de pruebas en local (en producción es Turso, nunca un fichero)
+local-dev.db
+local-dev.db-*
+*.log
+.DS_Store

@@ -1,0 +1,99 @@
+@import 'react-international-phone/style.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink font-sans text-white antialiased;
+    /* El ruido va sobre el fondo, no sobre el body: ver NoiseOverlay. */
+  }
+
+  /* Foco visible en todo lo interactivo. Sin esto el teclado navega a ciegas. */
+  :where(a, button, input, [tabindex]):focus-visible {
+    @apply outline-none ring-2 ring-brand-blue ring-offset-2 ring-offset-black;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-[1240px] px-5 sm:px-7;
+  }
+
+  /* Superficie elevada: negro azulado + borde tenue. El negro puro sobre negro
+     puro no separa nada. */
+  .surface {
+    @apply rounded-xl2 border border-white/10 bg-white/[0.03];
+  }
+
+  .kicker {
+    @apply text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-blue;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   react-international-phone viene con tema claro. Hay que oscurecerlo a mano o
+   aparece una caja blanca en mitad del formulario.
+   --------------------------------------------------------------------------- */
+
+.react-international-phone-input-container .react-international-phone-input,
+.react-international-phone-input-container .react-international-phone-country-selector-button {
+  height: 3.25rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.react-international-phone-input-container .react-international-phone-country-selector-button {
+  border-radius: 0.75rem 0 0 0.75rem;
+  padding-left: 0.75rem;
+}
+
+.react-international-phone-input-container .react-international-phone-input {
+  border-radius: 0 0.75rem 0.75rem 0;
+  width: 100%;
+}
+
+.react-international-phone-input-container .react-international-phone-input:focus,
+.react-international-phone-input-container
+  .react-international-phone-country-selector-button:focus-visible {
+  border-color: rgba(1, 116, 199, 0.7);
+  outline: none;
+}
+
+.react-international-phone-country-selector-dropdown {
+  background-color: #0b1219;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-radius: 0.75rem;
+}
+
+.react-international-phone-country-selector-dropdown__list-item:hover,
+.react-international-phone-country-selector-dropdown__list-item--focused {
+  background-color: rgba(1, 116, 199, 0.22);
+}
+
+/* Estado de error: el borde rojo tiene que ganar al del tema oscuro. */
+.phone-error .react-international-phone-input,
+.phone-error .react-international-phone-country-selector-button {
+  border-color: rgba(248, 113, 113, 0.7) !important;
+}
