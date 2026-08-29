@@ -157,8 +157,12 @@ export default function VideoGate() {
                 <span className="grid h-16 w-16 place-items-center rounded-full bg-brand-gradient shadow-pill">
                   <VolumeX size={26} className="text-white" />
                 </span>
-                <span className="text-lg font-extrabold sm:text-2xl">Tu vídeo ya ha comenzado</span>
+                <span className="text-lg font-extrabold sm:text-2xl">Tu clase ya ha comenzado</span>
                 <span className="text-sm text-white/60">Toca para activar el sonido</span>
+                {/* Recordarle que es gratis justo aqui, que es donde decide. */}
+                <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-emerald-300">
+                  Gratis
+                </span>
               </span>
             </button>
           )}
@@ -170,7 +174,7 @@ export default function VideoGate() {
                   Dime dónde te escribo y sigue viendo
                 </p>
                 <p className="mt-1.5 text-center text-[13px] text-white/50">
-                  El vídeo se reanuda en cuanto envíes.
+                  La clase se reanuda en cuanto envíes. No te cobro nada.
                 </p>
 
                 <div className="mt-5 space-y-3.5">

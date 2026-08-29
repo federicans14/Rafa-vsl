@@ -37,8 +37,22 @@ export default function Hero() {
 
       <div className="container-site relative">
         <div className="mx-auto max-w-3xl text-center">
-          <p data-anim="hero" className="kicker">
-            Mira gratis cómo funciona el sistema
+          {/* "Gratis" en una píldora y no en una línea de texto: es la objeción
+              numero uno que hay que desactivar antes de pedir nada. Va en verde
+              y no en el azul de marca porque tiene que destacar SOBRE la marca,
+              no fundirse con ella. */}
+          <p
+            data-anim="hero"
+            className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+            </span>
+            <span className="text-[13px] font-black uppercase tracking-[0.14em] text-emerald-300">
+              Clase gratuita
+            </span>
+            <span className="text-[13px] font-semibold text-white/40">· 8 min</span>
           </p>
 
           <h1
@@ -59,6 +73,10 @@ export default function Hero() {
           <p data-anim="hero" className="mt-6 text-sm text-white/45">
             {BRAND.coach} · entrenador online desde hace {BRAND.yearsCoaching} años ·{' '}
             {BRAND.peopleHelped} personas ayudadas
+          </p>
+
+          <p data-anim="hero" className="mt-3 text-[13px] text-white/35">
+            Sin pagar nada y sin compromiso. Solo dime dónde te la mando.
           </p>
         </div>
 

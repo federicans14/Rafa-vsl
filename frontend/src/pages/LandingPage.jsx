@@ -7,6 +7,7 @@ import Protocol from '../components/Protocol.jsx';
 import SocialProof from '../components/SocialProof.jsx';
 import FinalCTA from '../components/FinalCTA.jsx';
 import Footer from '../components/Footer.jsx';
+import FloatingWhatsapp from '../components/FloatingWhatsapp.jsx';
 import { prewarmBackend } from '../lib/prewarmBackend.js';
 
 export default function LandingPage() {
@@ -31,6 +32,8 @@ export default function LandingPage() {
       </main>
 
       <Footer />
+
+      <FloatingWhatsapp />
     </div>
   );
 }
