@@ -56,6 +56,10 @@ export function buildWhatsappUrl() {
 
 export const VSL = {
   youtubeId: 'DGXR5Dj_TWI',
+  // La duracion NO se enseña en ninguna parte (decision del 29/08). Anunciar
+  // "8 min" hace que gente que habria visto el video entero decida antes de
+  // empezar que no tiene tiempo. Se deja el dato aqui solo como referencia
+  // interna: no volver a sacarlo a la pagina.
   durationLabel: '8 min',
   // youtube-nocookie: no planta cookies de seguimiento hasta que se reproduce,
   // y esta marca todavía no tiene aviso de cookies.

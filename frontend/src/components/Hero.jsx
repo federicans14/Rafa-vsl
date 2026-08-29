@@ -52,7 +52,6 @@ export default function Hero() {
             <span className="text-[13px] font-black uppercase tracking-[0.14em] text-emerald-300">
               Clase gratuita
             </span>
-            <span className="text-[13px] font-semibold text-white/40">· 8 min</span>
           </p>
 
           <h1
