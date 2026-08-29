@@ -1,0 +1,59 @@
+# Despliegue de la LANDING VSL en Netlify.
+#
+# Por qué Netlify y no Render, si el backend sí está en Render:
+#
+#   Render cobra los dominios propios a partir del cupo del plan, y ese cupo ya
+#   está gastado por las otras propiedades de Rafa (entrenaconrafa.com, www y
+#   plan.). Pagar por el cuarto obligaría a dejar una tarjeta en el workspace,
+#   una tarjeta que acabaría pagando infraestructura de varios clientes a la vez.
+#
+#   Netlify da dominios propios ilimitados y gratis, sin tarjeta. Y esta landing
+#   es un sitio estático: no necesita nada de lo que Render aporta.
+#
+# Reparto final, el mismo montaje que la landing de Álvaro:
+#
+#   clase.entrenaconrafa.com      → Netlify (este archivo)
+#   rafa-vsl-api.onrender.com     → Render, sin dominio propio
+#
+# La API se queda sin dominio propio a propósito: esa dirección no la ve ningún
+# visitante, solo la llama el JavaScript de la landing.
+
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+  # No son secretos: acaban dentro del bundle que descarga el navegador de todas
+  # formas. Se ponen aquí y no en el panel para que queden bajo control de
+  # versiones y no dependan de que alguien se acuerde de configurarlas.
+  VITE_API_URL = "https://rafa-vsl-api.onrender.com"
+
+  # El mismo píxel que plan.entrenaconrafa.com.
+  VITE_FB_PIXEL_ID = "573368385466909"
+
+  # VITE_FB_DOMAIN_VERIFICATION se deja SIN definir hasta tener el código de
+  # Meta. Sin él, vite.config.js no inyecta la etiqueta y no pasa nada.
+  #
+  # ⚠️ Vite incrusta las VITE_* durante el build. Cambiar un valor aquí obliga a
+  # relanzar el despliegue: no basta con guardarlo.
+
+# Enrutado SPA: el enrutador vive en el navegador, así que cualquier ruta tiene
+# que servir index.html. Sin esto, entrar directo en /admin da un 404.
+# Duplica lo que ya hace frontend/public/_redirects; se deja en los dos sitios
+# porque el _redirects es el que viaja si algún día se despliega a mano.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Cabeceras básicas. La landing pide teléfono y email, así que conviene que no
+# se pueda embeber en un iframe ajeno para robar los datos del formulario.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

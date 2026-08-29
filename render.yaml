@@ -60,27 +60,16 @@ services:
       - key: ADMIN_SEED_NAME
         value: Rafa
 
-  # --- Frontend: la landing VSL ---------------------------------------------
-  - name: rafa-vsl-web
-    type: web
-    runtime: static
-    # Sin `plan`: los sitios estáticos de Render no tienen planes y el campo hace
-    # fallar el blueprint entero con "no such plan free for service type web".
-    rootDir: ./frontend
-    buildCommand: npm ci && npm run build
-    staticPublishPath: ./dist
-    envVars:
-      # OJO: Vite incrusta estas variables DURANTE el build. Cambiarlas no basta,
-      # hay que relanzar el despliegue o la web publicada conserva el valor viejo
-      # y los leads no se guardan sin dar ningún error.
-      - key: VITE_API_URL
-        sync: false
-      - key: VITE_FB_PIXEL_ID
-        sync: false
-      - key: VITE_FB_DOMAIN_VERIFICATION
-        sync: false
-    routes:
-      # SPA con react-router: sin esto, entrar directo a /admin o recargar da 404.
-      - type: rewrite
-        source: /*
-        destination: /index.html
+  # --- Frontend ---------------------------------------------------------------
+  #
+  # La landing NO va aqui: vive en Netlify (ver netlify.toml en la raiz).
+  #
+  # Motivo: Render cobra los dominios propios pasado el cupo del plan, y ese cupo
+  # ya lo gastan las otras propiedades de Rafa. Netlify los da ilimitados y
+  # gratis, y esta landing es un sitio estatico que no necesita nada mas.
+  #
+  # Si algun dia se quiere volver a traer, el bloque estaba aqui: `type: web`,
+  # `runtime: static`, rootDir ./frontend, build `npm ci && npm run build`,
+  # staticPublishPath ./dist, y una regla de rewrite /* -> /index.html.
+  # OJO: sin `plan`, que los sitios estaticos de Render no tienen y hace fallar
+  # el blueprint entero.
